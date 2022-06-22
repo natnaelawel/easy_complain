@@ -10,8 +10,11 @@ $errors = []
 if (isset($_POST['register'])) {
 
     $fullname = stripslashes($_POST['fullname']);
+    $fullname = htmlspecialchars($fullname);
     $email    = stripslashes($_POST['email']);
+    $email    = htmlspecialchars($email);
     $password = stripslashes($_POST['password']);
+    $password = htmlspecialchars($password);
     $confirm = stripslashes($_POST['confirm_password']);
 
     if (empty($fullname)) {
@@ -75,7 +78,7 @@ if (isset($_POST['register'])) {
             }
         } catch (Exception $th) {
             write_to_console($th);
-            echo "Failed to register user second" . $th->getMessage();
+            echo "Failed to register user" . $th->getMessage();
         }
     }
 }

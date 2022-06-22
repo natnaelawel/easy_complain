@@ -26,6 +26,7 @@ if (isset($_FILES['formFile'])) {
     }
 
     if (csrf_token_is_valid()) {
+        write_to_console("heelloow");
         if (count($errors) == 0) {
             $uploadok = 1;
             $file_name = $_FILES['formFile']['name'];

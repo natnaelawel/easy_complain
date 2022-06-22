@@ -107,9 +107,6 @@ if (isset($_GET['id'])) {
         $file_path =  $row["file_path"];
         $user_id =  $row["user_id"];
     }
-} else {
-    header("Location: dashboard.php");
-    exit();
 }
 ?>
 
@@ -118,6 +115,20 @@ if (isset($_GET['id'])) {
     <div class="flex flex-col w-1/2">
         <div class="flex">
             <h2 class="text-4xl font-bold">Update Feedback</h2>
+        </div>
+        <div class="form-group error-display">
+            <?php
+            if (isset($_POST["update_feedback"])) :
+            ?>
+                <?php
+                if (count($errors) > 0) {
+                    echo '<p class="text-red-600 font-bold">Error with updating:</p> <br/>';
+                    foreach ($errors as $error) {
+                        echo '<p class="text-red-600">' . $error . "</p>" . '<br/>';
+                    }
+                }
+                ?>
+            <?php endif; ?>
         </div>
         <div id="update_feedback_form" class="flex flex-col">
             <form action="update_feedback.php" method="post" enctype="multipart/form-data">
@@ -143,7 +154,7 @@ if (isset($_GET['id'])) {
                 </div>
                 <div class="my-5">
                     <div class="flex items-center justify-start w-full">
-                        <button type="submit" name="feedback" data-test-id="edit_button" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 disabled:bg-indigo-400  disabled:cursor-not-allowed rounded text-white px-10 py-3 text-sm flex">
+                        <button type="submit" name="update_feedback" data-test-id="edit_button" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 disabled:bg-indigo-400  disabled:cursor-not-allowed rounded text-white px-10 py-3 text-sm flex">
                             Submit
                         </button>
 

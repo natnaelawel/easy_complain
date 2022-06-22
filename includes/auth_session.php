@@ -11,5 +11,5 @@ if (!$isLoggedIn) {
 $isAdmin = isset($_SESSION["is_admin"]) && $_SESSION["is_admin"] == 1;
 $isActive = isset($_SESSION["is_active"]) && $_SESSION["is_active"] == 1;
 
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
+// error_reporting(E_ALL);
+// ini_set("display_errors", 1);

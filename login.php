@@ -14,10 +14,12 @@ $errors = []
 if (isset($_POST['login'])) {
 
     $email = stripslashes($_POST['email']);    // removes backslashes
+    $email = htmlspecialchars($email);    // removes backslashes
     $password = stripslashes($_POST['password']);
+    $password = htmlspecialchars($password);
     $recaptcha = $_POST['g-recaptcha-response'];
 
-    $secret_key = '6LeQ1IsgAAAAAJzDC0U9-Art6FVhr2MXeixI2l5V';
+    $secret_key = "";
 
 
     if (empty($email)) {

@@ -69,7 +69,7 @@ require_once "./libs/csrf_token.php";
                             </td>
 
                             <td class="p-3 px-5 ">
-                                <a href='files.php?filename=<?php echo $file_path ?>' target="_blank" rel="noopener noreferrer">
+                                <a class="text-blue" href='files.php?filename=<?php echo $file_path ?>' target="_blank" rel="noopener noreferrer">
                                     pdf link
                                 </a>
                             </td>
