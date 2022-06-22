@@ -18,9 +18,13 @@ $errors = []
 
 if (isset($_FILES['formFile'])) {
     $comment = $_POST['comment'];
+    $comment = stripslashes($comment);    // removes backslashes
+    $comment = htmlspecialchars($comment);
+
     if (empty($comment)) {
         array_push($errors, "Comment is required");
     }
+
     if (csrf_token_is_valid()) {
         if (count($errors) == 0) {
             $uploadok = 1;
@@ -96,7 +100,7 @@ if (isset($_FILES['formFile'])) {
                     <?php endif; ?>
                 </div>
                 <input type="hidden" name="csrf_token" value=<?php echo $_SESSION['csrf_token']; ?> />
-                <input type="hidden" name="session_id" value= ?> />
+                <input type="hidden" name="session_id" value=<?php echo $_SESSION['id'] ?> />
                 <div class="my-4">
                     <div class="my-5">
                         <label class="block mb-1" for="comment">Comment</label>

@@ -14,6 +14,13 @@ $errors = []
 
 if (isset($_FILES['formFile'])) {
     $feedback_id = $_POST['id'];
+    $session_id = $_POST['session_id'];
+    $user_id = $_SESSION["id"];
+
+    if ($session_id != $user_id) {
+        array_push($errors, "You have tried to hack us!");
+    }
+
     $comment = $_POST['comment'];
     $file = $_POST['formFile'];
     $token = $_POST['csrf_token'];
@@ -23,7 +30,6 @@ if (isset($_FILES['formFile'])) {
     $file = htmlspecialchars($file, ENT_QUOTES, 'UTF-8');
     $token = htmlspecialchars($token, ENT_QUOTES, 'UTF-8');
 
-
     if (!$token || $token !== $_SESSION['csrf_token']) {
         header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
         exit;
@@ -32,8 +38,6 @@ if (isset($_FILES['formFile'])) {
         array_push($errors, "Comment is required");
     }
     if (count($errors) == 0) {
-        $uploadok = 1;
-        
         $file_name = $_FILES['formFile']['name'];
         $file_size = $_FILES['formFile']['size'];
         $file_tmp = $_FILES['formFile']['tmp_name'];
@@ -79,34 +83,35 @@ if (isset($_FILES['formFile'])) {
                 array_push($errors, "Failed to upload comment");
             }
         }
-    } else {
-        array_push($errors, "Please fill all details");
     }
 }
 ?>
 
 
 <?php
-$id = $_GET['id'];
-$id = stripslashes($id);
-$id = htmlspecialchars($id, ENT_QUOTES, 'UTF-8');
-$sql = "SELECT * FROM feedbacks WHERE id = :id";
-$stmt = $conn->prepare($sql);
-$stmt->bindParam(":id", $id, PDO::PARAM_INT);
+if (isset($_GET['id'])) {
 
-$stmt->execute();
-$count = $stmt->rowCount();
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $id = $_GET['id'];
+    $id = stripslashes($id);
+    $id = htmlspecialchars($id, ENT_QUOTES, 'UTF-8');
+    $sql = "SELECT * FROM feedbacks WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
-if ($count > 0) {
-    $id  =  $row["id"];
-    $comment =  $row["comment"];
-    $file_path =  $row["file_path"];
-    $user_id =  $row["user_id"];
+    $stmt->execute();
+    $count = $stmt->rowCount();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($count > 0) {
+        $comment =  $row["comment"];
+        $file_path =  $row["file_path"];
+        $user_id =  $row["user_id"];
+    }
+} else {
+    header("Location: dashboard.php");
+    exit();
 }
 ?>
-
-
 
 
 <main class="min-h-[calc(100vh-100px)] flex flex-col justify-center items-center border">
@@ -115,9 +120,10 @@ if ($count > 0) {
             <h2 class="text-4xl font-bold">Update Feedback</h2>
         </div>
         <div id="update_feedback_form" class="flex flex-col">
-            <form action="feedback.php" method="post" enctype="multipart/form-data">
+            <form action="update_feedback.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value=<?php echo $id; ?> />
                 <input type="hidden" name="file" value=<?php echo $file_path; ?> />
+                <input type="hidden" name="session_id" value=<?php echo $_SESSION["id"]; ?> />
                 <input type="hidden" name="csrf_token" value=<?php echo $_SESSION['csrf_token']; ?> />
 
 

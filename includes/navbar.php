@@ -10,16 +10,23 @@ $stored_token = $_SESSION['csrf_token'];
                 <div class="container mx-auto flex items-center justify-between">
                     <div class="md:w-4/12 cursor-pointer text-gray-800 dark:text-white" aria-label="the Crib.">
                         <h1 class="text-xl font-bold">
-                            Easy Complaint System
+                            <a href="dashboard.php">
+                                Easy Complaint System
+                            </a>
                         </h1>
                     </div>
                     <ul class="hidden w-8/12 md:flex items-center justify-center space-x-8">
                         <li>
                             <a href="/www/itsec-project/dashboard.php" class="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">Dashboard</a>
                         </li>
-                        <li>
-                            <a href="/www/itsec-project/feedback.php" class="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">Feedback</a>
-                        </li>
+
+                        <?php
+                        if ($isLoggedIn && !$isAdmin) :
+                        ?>
+                            <li>
+                                <a href="/www/itsec-project/feedback.php" class="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">Feedback</a>
+                            </li>
+                        <?php endif; ?>
                         <?php
                         if ($isAdmin) :
                         ?>

@@ -5,7 +5,7 @@ require_once("./config/db.php");
 require_once "./libs/csrf_token.php";
 
 $filename = stripslashes($_GET['filename']);    // removes backslashes
-$filename = htmlspecialchars($id, ENT_QUOTES, 'UTF-8');
+$filename = htmlspecialchars($filename, ENT_QUOTES, 'UTF-8');
 
 $fullpath = '/opt/lampp/htdocs/www/itsec-project/assets/uploads/' . basename($filename);
 

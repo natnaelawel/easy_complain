@@ -91,7 +91,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <th></th>
                         </tr>
                         <?php
-                
+
                         foreach ($users as $user) {
                             $id  =  $user["id"];
                             $fullname =  $user["fullname"];
@@ -117,7 +117,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     </p>
                                 </td>
 
-                                <td class="p-3 px-5 flex justify-end gap-x-2">
+                                <td class="p-3 px-5">
                                     <form action="moderator.php" method="post">
                                         <input type="hidden" name="user_id" value=<?php echo $id ?> />
                                         <button type="submit" name="moderator" class='text-sm  text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline  <?php echo (($status == 1) ?  " bg-blue-500 hover:bg-blue-700 " : " bg-red-500 hover:bg-red-700 ") ?>'>

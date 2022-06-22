@@ -10,9 +10,8 @@
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
 
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <title>It Sec</title>
+  <title>Easy Complain</title>
 
-  <!-- <script src="../public/assets/js/tailwind.js" ></script> -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {

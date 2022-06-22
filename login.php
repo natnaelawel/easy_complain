@@ -55,7 +55,7 @@ if (isset($_POST['login'])) {
             $count = $stmt->rowCount();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($count < 1) {
-                array_push($errors, "Invalid credentials no email");
+                array_push($errors, "Invalid credentials");
             } else {
                 $isMatched =  password_verify($password,  $row['password']);
                 if ($isMatched) {
@@ -88,7 +88,7 @@ if (isset($_POST['login'])) {
     <!-- Google reCAPTCHA CDN -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <main class="min-h-[calc(100vh-100px)] flex flex-col justify-center">
-        <div class="w-full bg-gray-50 flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+        <div class="w-full bg-gray-50 flex flex-col sm:justify-center items-center sm:pt-0">
             <div class="w-full sm:max-w-md p-5 mx-auto">
                 <h2 class="mb-12 text-center text-5xl font-extrabold">Login.</h2>
                 <div class="form-group error-display">
@@ -97,7 +97,7 @@ if (isset($_POST['login'])) {
                     ?>
                         <?php
                         if (count($errors) > 0) {
-                            echo '<p class="text-red-600 font-bold">Error with registration:</p> <br/>';
+                            echo '<p class="text-red-600 font-bold">Error with authenticatiion:</p> <br/>';
                             foreach ($errors as $error) {
                                 echo '<p class="text-red-600">' . $error . "</p>" . '<br/>';
                             }
