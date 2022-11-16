@@ -118,7 +118,7 @@ if (isset($_POST['login'])) {
                     </div>
 
                     <!-- div to show reCAPTCHA -->
-                    <div class="my-5 g-recaptcha" data-sitekey="6LeQ1IsgAAAAAJetG39_U_8322-A7Hzdyx7HSeux">
+                    <div class="my-5 g-recaptcha" data-sitekey="insert site key here like a6LaeQ1IsgAAaAAAaJetG3b9_U-A7Hzdyx7HSeux">
                     </div>
                     <br>
 
